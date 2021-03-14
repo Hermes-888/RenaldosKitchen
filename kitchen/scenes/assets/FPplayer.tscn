@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/assets/KinematicBody.gd" type="Script" id=1]
+[ext_resource path="res://scenes/assets/Camera.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape" id=1]
+
+[node name="FirstPersonController" type="Spatial"]
+
+[node name="Player" type="KinematicBody" parent="."]
+script = ExtResource( 1 )
+Sensitivity_X = 0.005
+Sensitivity_Y = 0.005
+Accelaration = 2
+Maximum_Walk_Speed = 5
+Jump_Speed = 1
+
+[node name="Camera" type="Camera" parent="Player"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.922409, 0 )
+current = true
+fov = 61.0
+script = ExtResource( 2 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Player"]
+transform = Transform( 0.5, 0, 0, 0, -2.18557e-08, -0.6, 0, 0.5, -2.62268e-08, 0, 0, 0 )
+shape = SubResource( 1 )

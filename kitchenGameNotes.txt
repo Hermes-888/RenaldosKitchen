@@ -1,0 +1,34 @@
+Renaldo's Kitchen - in Godot.
+
+Meshes that will have interaction should be separate gltf files
+To add scripts, particles, triggers and colliders
+
+Add StaticBody.CollisionShape.box for presence
+Add Area.CollisionShape.box for trigger
+	Add script to Area, connect entered & exited
+Add AnimationPlayer and animation 
+
+
+Appliances:
+sink_Handwash trigger Water particle emitter
+Microwave trigger Door open
+Oven trigger Door and Rack open
+Fridge trigger Door open
+
+
+Physics Items:
+Fry_Pan
+
+
+
+
+Use 512x512.jpg images when possible
+Build outside? cubemap?
+Bigger dining room?
+space for restrooms
+window counter with stools?
+
+---
+do we track when learning extras are viewed?
+
+The Code Breaker by Walter Isaacson mRNA
