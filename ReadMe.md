@@ -12,7 +12,12 @@ The Godot project is in the folder kitchen/
 scenes/ contains the prefabs to use in a project. It has several subfolders. 
 RenaldosKitchen.tscn is the main scene. 
 
-Demo: [[title](https://www.example.com)](http://dev.krissnik.com/games/kitchen/)
+Demo: [http://dev.krissnik.com/games/kitchen/](http://dev.krissnik.com/games/kitchen/)
+
+### ToDo: 
+Export separate gltf files for interactive and physics items
+
+Develop a static scene with an interactive appliance to play with.
 
 
 ### Interactive items
@@ -43,7 +48,6 @@ Front Door trigger
 ### Physics items
 Fry_Pan
 
-ToDo still ...
 
 
 ![](_screenshots/workspace.png)
