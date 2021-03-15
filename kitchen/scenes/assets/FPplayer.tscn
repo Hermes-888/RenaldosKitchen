@@ -11,12 +11,13 @@
 script = ExtResource( 1 )
 Sensitivity_X = 0.005
 Sensitivity_Y = 0.005
-Accelaration = 2
-Maximum_Walk_Speed = 5
+Maximum_Y_Look = 30
+Accelaration = 1
+Maximum_Walk_Speed = 3
 Jump_Speed = 1
 
 [node name="Camera" type="Camera" parent="Player"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.922409, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05434, 0 )
 current = true
 fov = 61.0
 script = ExtResource( 2 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://meshes/door-small.material" type="Material" id=1]
 [ext_resource path="res://meshes/galvanized.material" type="Material" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://meshes/emissive-light.material" type="Material" id=14]
 [ext_resource path="res://meshes/ceiling-light.material" type="Material" id=15]
 [ext_resource path="res://meshes/freezer-fan.material" type="Material" id=16]
+[ext_resource path="res://scenes/structures/FakeSky.tscn" type="PackedScene" id=17]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "OuterWalls_front"
@@ -122,7 +123,7 @@ surfaces/0 = {
 "vertex_count": 6
 }
 
-[sub_resource type="ArrayMesh" id=8]
+[sub_resource type="ArrayMesh" id=16]
 resource_name = "Back_door_frame"
 surfaces/0 = {
 "aabb": AABB( -0.131247, 0.00414516, -1, 0.262493, 2.66098, 2 ),
@@ -340,7 +341,7 @@ material/0 = null
 
 [node name="Back_door_frame" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.0711, 0.00426563, 3.07045 )
-mesh = SubResource( 8 )
+mesh = SubResource( 16 )
 material/0 = null
 
 [node name="Door_small_frame" type="MeshInstance" parent="."]
@@ -379,58 +380,41 @@ material/1 = null
 
 [node name="Ceiling_lights" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.9978, 3.29864, 3.12924 )
+visible = false
 mesh = SubResource( 15 )
 material/0 = null
 material/1 = null
 
 [node name="Lights" type="Node" parent="."]
 
-[node name="OmniLight" type="OmniLight" parent="Lights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.29788, 2.23048, -2.96316 )
-shadow_enabled = true
-omni_range = 2.0
+[node name="SpotLight" type="SpotLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 2.52699, 3.26716, -2.84652 )
+spot_range = 6.0
+spot_angle = 60.7
 
-[node name="OmniLight2" type="OmniLight" parent="Lights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.29788, 2.23048, 0.00509763 )
-shadow_enabled = true
-omni_range = 2.0
+[node name="SpotLight2" type="SpotLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 2.52699, 3.26716, 3.06605 )
+spot_range = 6.0
+spot_angle = 60.7
 
-[node name="OmniLight3" type="OmniLight" parent="Lights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.29788, 2.23048, 3.19491 )
-shadow_enabled = true
-omni_range = 2.0
+[node name="SpotLight3" type="SpotLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -1.23822, 3.26716, -2.84652 )
+spot_range = 6.0
+spot_angle = 71.9
 
-[node name="OmniLight4" type="OmniLight" parent="Lights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.08399, 2.23048, -2.96316 )
-shadow_enabled = true
-omni_range = 2.0
+[node name="SpotLight4" type="SpotLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -1.23822, 3.26716, 3.06605 )
+spot_range = 6.0
+spot_angle = 71.9
 
-[node name="OmniLight5" type="OmniLight" parent="Lights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.08399, 2.23048, 0.00509763 )
-shadow_enabled = true
-omni_range = 2.0
+[node name="SpotLight5" type="SpotLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -5.05625, 3.26716, -2.84652 )
+spot_range = 6.0
+spot_angle = 60.7
 
-[node name="OmniLight6" type="OmniLight" parent="Lights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.08399, 2.23048, 3.19491 )
-shadow_enabled = true
-omni_range = 2.0
+[node name="SpotLight6" type="SpotLight" parent="Lights"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -5.05625, 3.26716, 3.06605 )
+spot_range = 6.0
+spot_angle = 60.7
 
-[node name="OmniLight7" type="OmniLight" parent="Lights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.46925, 2.23048, -2.96316 )
-shadow_enabled = true
-omni_range = 2.0
-
-[node name="OmniLight8" type="OmniLight" parent="Lights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.46925, 2.23048, 0.00509763 )
-shadow_enabled = true
-omni_range = 2.0
-
-[node name="OmniLight9" type="OmniLight" parent="Lights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.46925, 2.23048, 3.19491 )
-shadow_enabled = true
-omni_range = 2.0
-
-[node name="OmniLight10" type="OmniLight" parent="Lights"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.81299, 2.23048, 3.19491 )
-shadow_enabled = true
-omni_range = 2.0
+[node name="FakeSky" parent="." instance=ExtResource( 17 )]
