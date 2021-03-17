@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://meshes/metal.material" type="Material" id=1]
 [ext_resource path="res://meshes/metal_001.material" type="Material" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://meshes/black-plastic.material" type="Material" id=4]
 [ext_resource path="res://meshes/chrome_001.material" type="Material" id=5]
 [ext_resource path="res://scenes/scripts/HandSinkActions.gd" type="Script" id=6]
+[ext_resource path="res://scenes/scripts/Handsink_Handle_Hot.cs" type="Script" id=7]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "Sink_handwash"
@@ -86,12 +87,15 @@ surfaces/0 = {
 }
 
 [sub_resource type="BoxShape" id=3]
-extents = Vector3( 0.527646, 0.0229709, 0.455299 )
+extents = Vector3( 0.548269, 0.0229709, 0.532879 )
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.536388, 0.132353, 0.363771 )
 
 [sub_resource type="SphereMesh" id=5]
+
+[sub_resource type="BoxShape" id=6]
+extents = Vector3( 0.0812093, 0.102575, 0.0836836 )
 
 [node name="Sink_Handwash" type="Spatial"]
 
@@ -113,10 +117,11 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01911, 0.619383 )
 
 [node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0134965, 0.0974554, -0.0707563 )
 shape = SubResource( 3 )
 
 [node name="AreaTrigger" type="Area" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1968, 1.46316 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04763, 1.46839 )
 script = ExtResource( 6 )
 
 [node name="CollisionShape" type="CollisionShape" parent="AreaTrigger"]
@@ -130,5 +135,18 @@ lifetime = 0.27
 mesh = SubResource( 5 )
 scale_amount = 0.02
 color = Color( 0.117647, 0.388235, 0.737255, 1 )
+
+[node name="Handle_Cold" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="Handle_Cold"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.193725, 1.29253, 0.138374 )
+shape = SubResource( 6 )
+
+[node name="Handle_Hot" type="Area" parent="."]
+script = ExtResource( 7 )
+
+[node name="CollisionShape2" type="CollisionShape" parent="Handle_Hot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.185721, 1.29253, 0.138374 )
+shape = SubResource( 6 )
 [connection signal="body_entered" from="AreaTrigger" to="AreaTrigger" method="_AreaTrigger_entered"]
 [connection signal="body_exited" from="AreaTrigger" to="AreaTrigger" method="_AreaTrigger_exited"]

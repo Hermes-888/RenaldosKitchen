@@ -1,0 +1,45 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\storage\\mydata\\_GodotProjects\\_RenaldosKitchen\\kitchen\\RenaldosKitchen.csproj": {}
+  },
+  "projects": {
+    "C:\\storage\\mydata\\_GodotProjects\\_RenaldosKitchen\\kitchen\\RenaldosKitchen.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\storage\\mydata\\_GodotProjects\\_RenaldosKitchen\\kitchen\\RenaldosKitchen.csproj",
+        "projectName": "RenaldosKitchen",
+        "projectPath": "C:\\storage\\mydata\\_GodotProjects\\_RenaldosKitchen\\kitchen\\RenaldosKitchen.csproj",
+        "packagesPath": "C:\\Users\\herme\\.nuget\\packages\\",
+        "outputPath": "C:\\storage\\mydata\\_GodotProjects\\_RenaldosKitchen\\kitchen\\.mono\\temp\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\herme\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net472"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net472": {
+            "targetAlias": "net472",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net472": {
+          "targetAlias": "net472",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

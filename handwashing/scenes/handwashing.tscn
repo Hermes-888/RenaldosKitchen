@@ -1,0 +1,181 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://meshes/paper.material" type="Material" id=1]
+[ext_resource path="res://scenes/hand_sink.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/scripts/handwashingManager.gd" type="Script" id=4]
+
+[sub_resource type="Environment" id=1]
+background_mode = 1
+ambient_light_color = Color( 0.27451, 0.27451, 0.27451, 1 )
+
+[sub_resource type="BoxShape" id=2]
+extents = Vector3( 0.073449, 0.078295, 0.0592742 )
+
+[sub_resource type="VisualShaderNodeColorOp" id=3]
+output_port_for_preview = 0
+default_input_values = [ 0, Vector3( 0.2, 0.5, 1 ), 1, Vector3( 0, 0, 0 ) ]
+
+[sub_resource type="VisualShader" id=4]
+code = "shader_type spatial;
+render_mode specular_schlick_ggx;
+
+
+
+
+void vertex() {
+// Output:0
+
+}
+
+void fragment() {
+// ColorOp:2
+	vec3 n_in2p0 = vec3(0.20000, 0.50000, 1.00000);
+	vec3 n_in2p1 = vec3(0.00000, 0.00000, 0.00000);
+	vec3 n_out2p0 = vec3(1.0) - (vec3(1.0) - n_in2p0) * (vec3(1.0) - n_in2p1);
+
+// Output:0
+	ALBEDO = n_out2p0;
+
+}
+
+void light() {
+// Output:0
+
+}
+"
+graph_offset = Vector2( -276, 142 )
+nodes/fragment/2/node = SubResource( 3 )
+nodes/fragment/2/position = Vector2( 60, 200 )
+nodes/fragment/connections = PoolIntArray( 2, 0, 0, 0 )
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
+
+[sub_resource type="SphereMesh" id=6]
+material = SubResource( 5 )
+radial_segments = 32
+rings = 16
+
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 0.0573012, 0.0742257, 0.0600889 )
+
+[sub_resource type="Animation" id=8]
+resource_name = "MoveCamera"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("ClippedCamera:transform")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Transform( 1, 0, 0, 0, 0.998042, 0.0625466, 0, -0.0625466, 0.998042, -1.635, 1.805, 1.51 ), Transform( 1, 0, 0, 0, 0.994117, 0.108312, 0, -0.108312, 0.994117, -1.635, 1.805, -1.129 ) ]
+}
+
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 0.202049, 0.24623, 0.075096 )
+
+[sub_resource type="BoxShape" id=10]
+extents = Vector3( 0.0883344, 0.151903, 0.059236 )
+
+[sub_resource type="PlaneMesh" id=11]
+material = ExtResource( 1 )
+
+[node name="Spatial" type="Spatial"]
+script = ExtResource( 4 )
+
+[node name="World" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource( 1 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="SpotLight" type="SpotLight" parent="World"]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -1.05875, 5.27377, -1.18298 )
+light_energy = 3.51
+spot_range = 7.0012
+spot_angle = 54.4139
+
+[node name="OmniLight" type="OmniLight" parent="World"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.492375, 1.97544, -0.390777 )
+light_energy = 0.48
+omni_range = 5.9
+
+[node name="hand_sink" parent="." instance=ExtResource( 2 )]
+
+[node name="ClippedCamera" type="ClippedCamera" parent="."]
+transform = Transform( 1, 0, 0, 0, 0.994117, 0.108312, 0, -0.108312, 0.994117, -1.635, 1.805, -1.129 )
+
+[node name="Handle_Hot" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.79813, 1.37262, -2.54951 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Handle_Hot"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0384182, -0.00222683 )
+shape = SubResource( 2 )
+
+[node name="Handle_Cold" type="Area" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3847, 1.37262, -2.54951 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Handle_Cold"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0384182, -0.00222683 )
+shape = SubResource( 2 )
+
+[node name="SpoutBase" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.59296, 1.25947, -2.56241 )
+
+[node name="CPUParticles" type="CPUParticles" parent="SpoutBase"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000661731, -0.0432585, 0.278533 )
+cast_shadow = 0
+emitting = false
+amount = 3
+lifetime = 0.28
+mesh = SubResource( 6 )
+scale_amount = 0.02
+
+[node name="SpoutArea" type="Area" parent="SpoutBase"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0105909, 0 )
+
+[node name="CollisionShape" type="CollisionShape" parent="SpoutBase/SpoutArea"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0305907, 0.275213 )
+shape = SubResource( 7 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/MoveCamera = SubResource( 8 )
+
+[node name="Triggers" type="Node" parent="."]
+
+[node name="Paper_Towels" type="Area" parent="Triggers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.55496, 1.76396, -2.48312 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Triggers/Paper_Towels"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0258942, -0.0322933, -0.0840394 )
+shape = SubResource( 9 )
+
+[node name="Soap" type="Area" parent="Triggers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.874077, 1.6253, -2.64288 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Triggers/Soap"]
+shape = SubResource( 10 )
+
+[node name="CPUPaperParticles" type="CPUParticles" parent="Triggers"]
+transform = Transform( 1, 0, 0, 0, 0.0244671, -0.999701, 0, 0.999701, 0.0244671, -2.55261, 1.71627, -2.6651 )
+emitting = false
+amount = 2
+lifetime = 2.5
+one_shot = true
+mesh = SubResource( 11 )
+direction = Vector3( 0, 0, 0 )
+gravity = Vector3( 0, 0.059, 0.5 )
+scale_amount = 0.16
+[connection signal="mouse_entered" from="Handle_Hot" to="." method="_on_Handle_Hot_mouse_entered"]
+[connection signal="mouse_exited" from="Handle_Hot" to="." method="_on_Handle_Hot_mouse_exited"]
+[connection signal="mouse_entered" from="Handle_Cold" to="." method="_on_Handle_Cold_mouse_entered"]
+[connection signal="mouse_exited" from="Handle_Cold" to="." method="_on_Handle_Cold_mouse_exited"]
+[connection signal="mouse_entered" from="SpoutBase/SpoutArea" to="." method="_on_SpoutArea_mouse_entered"]
+[connection signal="mouse_entered" from="Triggers/Paper_Towels" to="." method="_on_Paper_Towels_mouse_entered"]
+[connection signal="mouse_entered" from="Triggers/Soap" to="." method="_on_Soap_mouse_entered"]

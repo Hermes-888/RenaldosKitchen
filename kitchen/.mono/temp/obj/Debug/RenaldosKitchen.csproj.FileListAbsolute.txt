@@ -1,0 +1,8 @@
+C:\storage\mydata\_GodotProjects\_RenaldosKitchen\kitchen\.mono\temp\bin\Debug\RenaldosKitchen.dll
+C:\storage\mydata\_GodotProjects\_RenaldosKitchen\kitchen\.mono\temp\bin\Debug\RenaldosKitchen.pdb
+C:\storage\mydata\_GodotProjects\_RenaldosKitchen\kitchen\.mono\temp\obj\Debug\RenaldosKitchen.csprojAssemblyReference.cache
+C:\storage\mydata\_GodotProjects\_RenaldosKitchen\kitchen\.mono\temp\obj\Debug\RenaldosKitchen.AssemblyInfoInputs.cache
+C:\storage\mydata\_GodotProjects\_RenaldosKitchen\kitchen\.mono\temp\obj\Debug\RenaldosKitchen.AssemblyInfo.cs
+C:\storage\mydata\_GodotProjects\_RenaldosKitchen\kitchen\.mono\temp\obj\Debug\RenaldosKitchen.csproj.CoreCompileInputs.cache
+C:\storage\mydata\_GodotProjects\_RenaldosKitchen\kitchen\.mono\temp\obj\Debug\RenaldosKitchen.dll
+C:\storage\mydata\_GodotProjects\_RenaldosKitchen\kitchen\.mono\temp\obj\Debug\RenaldosKitchen.pdb
