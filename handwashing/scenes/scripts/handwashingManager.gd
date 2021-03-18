@@ -10,69 +10,150 @@ extends Spatial
 # animate Camera
 
 # Declare member variables
-var animPlayer
-var spoutEmitter
+
+var actionCount = 0 # +1 for each action until completed
+var completed = false
+# var allowAction = true #EACH STEP? # false can't interact before or after
+var waterOn = false
+var waterHot = false
+var soapUsed = false
+var paperTowelUsed = false
 var spoutRotated = false # toggle animation
-var spoutRotation = 213 # direction
+var spoutRotation = 18 # degrees
+var spoutEmitter
 var paperEmitter
+var soapEmitter
+var animPlayer
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	spoutEmitter = get_node("SpoutBase/CPUParticles")
-	# ERR: spoutEmitter.color(0,0,1,0.8)
+	spoutEmitter = get_node("SpoutBase/CPUWaterParticles") # start w/ blue water color
+	spoutEmitter.mesh.material.albedo_color = Color(0.11, 0.29, 0.48, 0.5)
 	
 	paperEmitter = get_node("Triggers/CPUPaperParticles")
+	soapEmitter = get_node("Triggers/CPUSoapParticles")
 	
 	animPlayer = get_node("AnimationPlayer")
 	animPlayer.play("MoveCamera")# Start: move toward sink
 	# at End: move back and rotate left to look at door handle
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func checkIfCompleted():
+	print(waterOn, waterHot, soapUsed, paperTowelUsed)
+	if (actionCount > 15):
+		completed = true
+	print("completed: ", completed, " count: ", actionCount)
 
 
 func _on_Handle_Hot_mouse_entered():
-	#spoutEmitter.color(0.25,0,0,0.5)# make the color blue?
+	if (!waterHot):
+		waterHot = true
+		# +1 water must be hot
+		actionCount = actionCount + 1
+		checkIfCompleted()
+	
+	if (waterOn and completed):
+		spoutEmitter.emitting = false
+		waterOn = false
+		return
+	
+	# HOT gui visible
+	# make the color red?
+	spoutEmitter.mesh.material.albedo_color = Color(0.48, 0.11, 0.33, 0.5)
 	spoutEmitter.emitting = true
+	waterOn = true
 
 
 func _on_Handle_Hot_mouse_exited():
-	pass # Replace with function body.
+	# HOT gui off?
+	pass # UNUSED
 
 
 func _on_Handle_Cold_mouse_entered():
-	# https://www.youtube.com/watch?v=ytL9nIYfcn0
-	#spoutEmitter.mesh.material.albedo.color(0,0,1,0.8)# make the color blue?
-	spoutEmitter.emitting = false
+	if (!waterOn):
+		# +1 water must be turned on
+		actionCount = actionCount + 1
+		checkIfCompleted()
+	
+	if (waterOn and completed):
+		spoutEmitter.emitting = false
+		waterOn = false
+		return
+	
+	# COLD gui visible
+	# make the color blue?
+	spoutEmitter.mesh.material.albedo_color = Color(0.11, 0.29, 0.48, 0.5)
+	spoutEmitter.emitting = true
+	waterOn = true
 
 
 func _on_Handle_Cold_mouse_exited():
-	pass # Replace with function body.
+	# COLD gui off
+	pass # UNUSED
 
 
 func _on_SpoutArea_mouse_entered():
-	# toggle Tween rotate spout and SpoutBase left or right
-	 
-	if (spoutRotated):
-		get_node("SpoutBase").transform.basis = Basis(Vector3(0, 1, 0), spoutRotation)
-		get_node("hand_sink/Faucet_spout").transform.basis = Basis(Vector3(0, 1, 0), spoutRotation)
+	# +1 simulate handwashing by touching 15 times?  $BUTTON_LEFT = down
+	actionCount = actionCount + 1 # WIP
+	checkIfCompleted()
+	
+	var dur = 0.3 # duration
+	var rotateTo = spoutRotation # flip if condition
+	var spoutFrom = get_node("SpoutBase").rotation_degrees.y
+	var faucetFrom = get_node("hand_sink/Faucet_spout").rotation_degrees.y
+	var stween = get_node("World/Tween")
+	var ftween = get_node("World/Tween")
+	#example: toggle Tween rotate spout and SpoutBase left or right
+	#tween.interpolate_property(obj, "position", from, to, 1, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	#tween.start()
+	
 	if (!spoutRotated):
-		get_node("SpoutBase").transform.basis = Basis(Vector3(0, 1, 0), -spoutRotation)
-		get_node("hand_sink/Faucet_spout").transform.basis = Basis(Vector3(0, 1, 0), -spoutRotation)
-		
+		rotateTo = -rotateTo
+	
+	# scripted animation
+	#get_node("SpoutBase").transform.basis = Basis(Vector3(0, 1, 0), rotateTo)
+	stween.interpolate_property(get_node("SpoutBase"), "rotation_degrees", 
+		Vector3(0,faucetFrom,0), Vector3(0,rotateTo,0), dur, 
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT) # delay (optional)
+	stween.start()
+	
+	#get_node("hand_sink/Faucet_spout").transform.basis = Basis(Vector3(0, 1, 0), rotateTo)
+	ftween.interpolate_property(get_node("hand_sink/Faucet_spout"), "rotation_degrees", 
+		Vector3(0,faucetFrom,0), Vector3(0,rotateTo,0), dur, 
+		Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	ftween.start()
+	
 	spoutRotated = !spoutRotated
-	# combine sink & legs Rename and re-import!
 
 
 func _on_Soap_mouse_entered():
-	print("soap dispenses particle blob once?")
-	pass # Replace with function body.
+	#print("soap dispenses particle blob once?")
+	if (!soapUsed):
+		# +1 must use soap
+		soapUsed = true
+		actionCount = actionCount + 1
+		checkIfCompleted()
+	
+	soapEmitter.emitting = true
 
 
 func _on_Paper_Towels_mouse_entered():
-	print("Paper towels dispenses animated paper?")
-	paperEmitter.emitting =  true;# one shot
-	pass # Replace with function body.
+	#print("Paper towels dispenses animated paper?")
+	if (!paperTowelUsed):
+		# +1 use a paper towel to dry hands
+		paperTowelUsed = true
+		actionCount = actionCount + 1
+		checkIfCompleted()
+	
+	paperEmitter.emitting =  true# one shot
+	if (completed):
+		# move back and rotate left to look at door handle
+		animPlayer.play("LookDoor")
+
+
+func _on_Door_Handle_mouse_entered():
+	# scripted animation rotates door handle
+	get_node("hand_sink/Door_wooden/Door_handle").transform.basis = Basis(Vector3(0, 0, 1), -13)
+	print("Done")
+	# trigger Done GUI
