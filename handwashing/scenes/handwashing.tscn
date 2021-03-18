@@ -6,18 +6,18 @@
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
-ambient_light_color = Color( 0.411765, 0.411765, 0.411765, 1 )
+ambient_light_color = Color( 0.152941, 0.152941, 0.152941, 1 )
 
-[sub_resource type="SpatialMaterial" id=12]
+[sub_resource type="SpatialMaterial" id=2]
 
-[sub_resource type="CylinderMesh" id=13]
-material = SubResource( 12 )
+[sub_resource type="CylinderMesh" id=3]
+material = SubResource( 2 )
 height = 3.0
 
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.0466281, 0.126389, 0.0392967 )
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=5]
 resource_name = "LookDoor"
 length = 2.0
 tracks/0/type = "value"
@@ -45,7 +45,7 @@ tracks/1/keys = {
 "values": [ Vector3( -6.218, 0, 0 ), Vector3( -6.218, 0, 0 ), Vector3( -6.226, 36.935, 0 ) ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=6]
 resource_name = "MoveCamera"
 length = 2.0
 tracks/0/type = "value"
@@ -61,25 +61,25 @@ tracks/0/keys = {
 "values": [ Transform( 1, 0, 0, 0, 0.998042, 0.0625466, 0, -0.0625466, 0.998042, -1.635, 1.805, 1.51 ), Transform( 1, 0, 0, 0, 0.994117, 0.108312, 0, -0.108312, 0.994117, -1.635, 1.805, -1.129 ) ]
 }
 
-[sub_resource type="BoxShape" id=9]
-extents = Vector3( 0.202049, 0.24623, 0.0666284 )
+[sub_resource type="BoxShape" id=7]
+extents = Vector3( 0.202049, 0.24623, 0.0857883 )
 
-[sub_resource type="BoxShape" id=10]
+[sub_resource type="BoxShape" id=8]
 extents = Vector3( 0.0883344, 0.151903, 0.059236 )
 
-[sub_resource type="PlaneMesh" id=11]
+[sub_resource type="PlaneMesh" id=9]
 material = ExtResource( 1 )
 
-[sub_resource type="BoxShape" id=2]
+[sub_resource type="BoxShape" id=10]
 extents = Vector3( 0.0500326, 0.0433176, 0.0392177 )
 
-[sub_resource type="SpatialMaterial" id=14]
+[sub_resource type="SpatialMaterial" id=11]
 albedo_color = Color( 0.733333, 0.501961, 0.780392, 1 )
 
-[sub_resource type="SphereMesh" id=15]
-material = SubResource( 14 )
+[sub_resource type="SphereMesh" id=12]
+material = SubResource( 11 )
 
-[sub_resource type="BoxShape" id=16]
+[sub_resource type="BoxShape" id=13]
 extents = Vector3( 0.0341196, 0.072016, 0.202603 )
 
 [node name="Spatial" type="Spatial"]
@@ -93,15 +93,13 @@ __meta__ = {
 "_editor_description_": ""
 }
 
-[node name="SpotLight" type="SpotLight" parent="World"]
-transform = Transform( 1, 0, 0, 0, 0.449054, 0.893505, 0, -0.893505, 0.449054, -1.05875, 5.27377, 2.0139 )
-light_energy = 3.51
-spot_range = 6.13177
-spot_angle = 54.4139
-
 [node name="OmniLight" type="OmniLight" parent="World"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.833, 1.975, -0.391 )
-omni_range = 8.0
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.144, 2.38, -1.303 )
+omni_range = 7.8
+
+[node name="OmniLight2" type="OmniLight" parent="World"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.545, 2.638, -0.238627 )
+omni_range = 9.0
 
 [node name="Tween" type="Tween" parent="World"]
 
@@ -119,7 +117,7 @@ cast_shadow = 0
 emitting = false
 amount = 3
 lifetime = 0.28
-mesh = SubResource( 13 )
+mesh = SubResource( 3 )
 scale_amount = 0.02
 
 [node name="SpoutArea" type="Area" parent="SpoutBase"]
@@ -127,49 +125,50 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0105909, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SpoutBase/SpoutArea"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12863, 0.275213 )
-shape = SubResource( 7 )
+shape = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/LookDoor = SubResource( 17 )
-anims/MoveCamera = SubResource( 8 )
+anims/LookDoor = SubResource( 5 )
+anims/MoveCamera = SubResource( 6 )
 
 [node name="Triggers" type="Node" parent="."]
 
 [node name="Paper_Towels" type="Area" parent="Triggers"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.56182, 1.76396, -2.54211 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.56182, 1.76396, -2.53591 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Triggers/Paper_Towels"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0258942, -0.0322933, -0.0840394 )
-shape = SubResource( 9 )
+shape = SubResource( 7 )
 
 [node name="Soap" type="Area" parent="Triggers"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.874077, 1.6253, -2.64288 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Triggers/Soap"]
-shape = SubResource( 10 )
+shape = SubResource( 8 )
 
 [node name="CPUPaperParticles" type="CPUParticles" parent="Triggers"]
 transform = Transform( 1, 0, 0, 0, 0.0244671, -0.999701, 0, 0.999701, 0.0244671, -2.55261, 1.71627, -2.6651 )
 emitting = false
 amount = 2
-lifetime = 2.5
+lifetime = 3.96
 one_shot = true
-mesh = SubResource( 11 )
+mesh = SubResource( 9 )
 direction = Vector3( 0, 0, 0 )
-gravity = Vector3( 0, 0.059, 0.5 )
+gravity = Vector3( 0, 0.055, 0.5 )
+linear_accel = -0.31
 scale_amount = 0.16
 
 [node name="Handle_Hot" type="Area" parent="Triggers"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80085, 1.31382, -2.5598 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Triggers/Handle_Hot"]
-shape = SubResource( 2 )
+shape = SubResource( 10 )
 
 [node name="Handle_Cold" type="Area" parent="Triggers"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38442, 1.31305, -2.5598 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Triggers/Handle_Cold"]
-shape = SubResource( 2 )
+shape = SubResource( 10 )
 
 [node name="CPUSoapParticles" type="CPUParticles" parent="Triggers"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.866817, 1.47773, -2.67098 )
@@ -177,7 +176,7 @@ emitting = false
 amount = 3
 lifetime = 0.4
 one_shot = true
-mesh = SubResource( 15 )
+mesh = SubResource( 12 )
 gravity = Vector3( 0, -1.8, 0 )
 scale_amount = 0.03
 
@@ -185,7 +184,35 @@ scale_amount = 0.03
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.41805, 1.33129, -1.22575 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Triggers/Door_Handle"]
-shape = SubResource( 16 )
+shape = SubResource( 13 )
+
+[node name="Control" type="Control" parent="."]
+visible = false
+margin_right = 1025.0
+margin_bottom = 152.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="Control"]
+margin_left = 34.0
+margin_top = 34.2973
+margin_right = 328.0
+margin_bottom = 139.297
+
+[node name="Label" type="Label" parent="Control/Panel"]
+margin_left = 74.0
+margin_top = 12.0
+margin_right = 251.0
+margin_bottom = 26.0
+text = "Label for this panel"
+
+[node name="Label2" type="Label" parent="Control/Panel"]
+margin_left = 13.6759
+margin_top = 47.8656
+margin_right = 53.6759
+margin_bottom = 61.8656
+text = "Temperature:"
 [connection signal="mouse_entered" from="SpoutBase/SpoutArea" to="." method="_on_SpoutArea_mouse_entered"]
 [connection signal="mouse_entered" from="Triggers/Paper_Towels" to="." method="_on_Paper_Towels_mouse_entered"]
 [connection signal="mouse_entered" from="Triggers/Soap" to="." method="_on_Soap_mouse_entered"]

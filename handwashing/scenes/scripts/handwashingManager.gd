@@ -7,10 +7,8 @@ extends Spatial
 
 # https://docs.godotengine.org/en/stable/tutorials/3d/using_transforms.html
 # transform.basis = Basis(Vector3(1, 0, 0), PI) * transform.basis
-# animate Camera
 
 # Declare member variables
-
 var actionCount = 0 # +1 for each action until completed
 var completed = false
 # var allowAction = true #EACH STEP? # false can't interact before or after
@@ -18,6 +16,8 @@ var waterOn = false
 var waterHot = false
 var soapUsed = false
 var paperTowelUsed = false
+var doorOpened = false
+
 var spoutRotated = false # toggle animation
 var spoutRotation = 18 # degrees
 var spoutEmitter
@@ -35,8 +35,8 @@ func _ready():
 	soapEmitter = get_node("Triggers/CPUSoapParticles")
 	
 	animPlayer = get_node("AnimationPlayer")
-	animPlayer.play("MoveCamera")# Start: move toward sink
-	# at End: move back and rotate left to look at door handle
+	animPlayer.play("MoveCamera")# Start: move camera toward sink
+	# at End: move camera back and rotate left to look at door handle
 
 
 func checkIfCompleted():
@@ -44,6 +44,17 @@ func checkIfCompleted():
 	if (actionCount > 15):
 		completed = true
 	print("completed: ", completed, " count: ", actionCount)
+
+
+func resetVariables():
+	actionCount = 0 # +1 for each action until completed
+	completed = false
+	# allowAction = true #EACH STEP? # false can't interact before or after
+	waterOn = false
+	waterHot = false
+	soapUsed = false
+	paperTowelUsed = false
+	doorOpened = false
 
 
 func _on_Handle_Hot_mouse_entered():
@@ -100,7 +111,7 @@ func _on_SpoutArea_mouse_entered():
 	
 	var dur = 0.3 # duration
 	var rotateTo = spoutRotation # flip if condition
-	var spoutFrom = get_node("SpoutBase").rotation_degrees.y
+	#var spoutFrom = get_node("SpoutBase").rotation_degrees.y
 	var faucetFrom = get_node("hand_sink/Faucet_spout").rotation_degrees.y
 	var stween = get_node("World/Tween")
 	var ftween = get_node("World/Tween")
@@ -154,6 +165,13 @@ func _on_Paper_Towels_mouse_entered():
 
 func _on_Door_Handle_mouse_entered():
 	# scripted animation rotates door handle
+	if (doorOpened):
+		get_node("hand_sink/Door_wooden/Door_handle").transform.basis = Basis(Vector3(0, 0, 1), 0)#13
+		animPlayer.play_backwards("LookDoor")
+		resetVariables()
+		return
+	
 	get_node("hand_sink/Door_wooden/Door_handle").transform.basis = Basis(Vector3(0, 0, 1), -13)
+	doorOpened = true
 	print("Done")
 	# trigger Done GUI
