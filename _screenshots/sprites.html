@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<style type="text/css">
+
+		body {
+			margin: 0;
+			border: 0 none;
+			padding: 0;
+			text-align: center;
+			background-color: #222226;
+			font-family: 'Noto Sans', Arial, sans-serif;
+		}
+        .container {
+            position: absolute;
+            top: 20%;
+            left: 20%;
+            width: 516px;
+            height: 566px;
+            overflow: hidden;
+        }
+        .bg-water_ss {
+            width: 1548px; height: 566px;
+            background: url('water_ss.jpg'); /*-10px -10px; */
+            
+            animation: sprite 0.4s steps(3) infinite;
+            /* animation-name: sprite; 
+            animation-duration: 1.5s;
+            animation-timing-function: steps(3);
+            animation-iteration-count: infinite; */
+            /* transform: translate(-25%, -25%) scale(0.5); */
+        }
+
+        @media only screen and (min-width: 1024px) {
+            .bg-water_ss {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes sprite {
+            /* from { background-position: 0px; } */
+            to { background-position: -1548px; }
+        }
+	</style>
+
+</head>
+<body>
+    <!-- https://blog.logrocket.com/making-css-animations-using-a-sprite-sheet/ -->
+	<div class="container">
+        <div class="bg-water_ss"></div>
+	</div>
+</body>
+</html>
+
