@@ -1,3 +1,19 @@
+# Interactive Handwashing
+Learn the proper way to wash your hands.
+
+### ToDo:
+Add sounds for paper towel dispenser, door knob, water, points
+
+Theme for UI, choose a font
+
+Draw custom sprites and animated hands scrubbing
+
+Cursor starts as graphic of a hand, 2 hands, png sequence of hands washing, hand w/ towel, 
+Cursor changes to paper towel to open door
+
+![](_screenshots/handwashing.png)
+
+
 # Renaldos Kitchen
 
 An interactive 3D space using the Godot game engine. 
@@ -49,8 +65,6 @@ Front Door trigger
 Fry_Pan
 
 
-
 ![](_screenshots/workspace.png)
 
 ![](_screenshots/triggerAnimation.png)
-
