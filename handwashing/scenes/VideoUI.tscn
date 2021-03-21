@@ -1,0 +1,24 @@
+[gd_scene format=2]
+
+[node name="VideoUI" type="Control"]
+anchor_right = 1.0
+margin_right = -1024.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_left = 356.0
+margin_top = 150.0
+margin_right = 683.0
+margin_bottom = 330.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VideoPlayer" type="VideoPlayer" parent="PanelContainer"]
+visible = false
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 331.0
+margin_bottom = 208.0

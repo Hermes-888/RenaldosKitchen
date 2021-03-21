@@ -1,18 +1,22 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://meshes/paper.material" type="Material" id=1]
 [ext_resource path="res://scenes/hand_sink.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/scripts/handwashingManager.gd" type="Script" id=4]
+[ext_resource path="res://scenes/VideoUI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/Pointsprite.tscn" type="PackedScene" id=6]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
-ambient_light_color = Color( 0.152941, 0.152941, 0.152941, 1 )
+ambient_light_color = Color( 0.0156863, 0.0784314, 0.14902, 1 )
 
 [sub_resource type="SpatialMaterial" id=2]
 
 [sub_resource type="CylinderMesh" id=3]
 material = SubResource( 2 )
 height = 3.0
+radial_segments = 16
 
 [sub_resource type="BoxShape" id=4]
 extents = Vector3( 0.0466281, 0.126389, 0.0392967 )
@@ -58,7 +62,34 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 2 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
-"values": [ Transform( 1, 0, 0, 0, 0.998042, 0.0625466, 0, -0.0625466, 0.998042, -1.635, 1.805, 1.51 ), Transform( 1, 0, 0, 0, 0.994117, 0.108312, 0, -0.108312, 0.994117, -1.635, 1.805, -1.129 ) ]
+"values": [ Transform( 1, 0, 0, 0, 0.998042, 0.0625466, 0, -0.0625466, 0.998042, -1.635, 1.805, 0.839 ), Transform( 1, 0, 0, 0, 0.994117, 0.108312, 0, -0.108312, 0.994117, -1.635, 1.805, -1.129 ) ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "showPointsprite"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pointsprite:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 487, 317 ), Vector2( 149, 63 ), Vector2( 149, 63 ), Vector2( 149, -33 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Pointsprite:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6, 0.8, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 2, 2 ), Vector2( 2, 2 ), Vector2( 0.5, 0.5 ) ]
 }
 
 [sub_resource type="BoxShape" id=7]
@@ -81,6 +112,9 @@ material = SubResource( 11 )
 
 [sub_resource type="BoxShape" id=13]
 extents = Vector3( 0.0341196, 0.072016, 0.202603 )
+
+[sub_resource type="BoxShape" id=14]
+extents = Vector3( 0.318304, 0.457325, 0.18776 )
 
 [node name="Spatial" type="Spatial"]
 script = ExtResource( 4 )
@@ -130,6 +164,7 @@ shape = SubResource( 4 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/LookDoor = SubResource( 5 )
 anims/MoveCamera = SubResource( 6 )
+anims/showPointsprite = SubResource( 15 )
 
 [node name="Triggers" type="Node" parent="."]
 
@@ -186,33 +221,19 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.41805, 1.33129, -1.22575 )
 [node name="CollisionShape" type="CollisionShape" parent="Triggers/Door_Handle"]
 shape = SubResource( 13 )
 
-[node name="Control" type="Control" parent="."]
+[node name="Trash" type="Area" parent="Triggers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.56253, 0.602103, -2.47571 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Triggers/Trash"]
+shape = SubResource( 14 )
+
+[node name="GUI" parent="." instance=ExtResource( 3 )]
+
+[node name="VideoUI" parent="." instance=ExtResource( 5 )]
 visible = false
-margin_right = 1025.0
-margin_bottom = 152.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="Panel" type="Panel" parent="Control"]
-margin_left = 34.0
-margin_top = 34.2973
-margin_right = 328.0
-margin_bottom = 139.297
-
-[node name="Label" type="Label" parent="Control/Panel"]
-margin_left = 74.0
-margin_top = 12.0
-margin_right = 251.0
-margin_bottom = 26.0
-text = "Label for this panel"
-
-[node name="Label2" type="Label" parent="Control/Panel"]
-margin_left = 13.6759
-margin_top = 47.8656
-margin_right = 53.6759
-margin_bottom = 61.8656
-text = "Temperature:"
+[node name="Pointsprite" parent="." instance=ExtResource( 6 )]
+position = Vector2( 487, 317 )
 [connection signal="mouse_entered" from="SpoutBase/SpoutArea" to="." method="_on_SpoutArea_mouse_entered"]
 [connection signal="mouse_entered" from="Triggers/Paper_Towels" to="." method="_on_Paper_Towels_mouse_entered"]
 [connection signal="mouse_entered" from="Triggers/Soap" to="." method="_on_Soap_mouse_entered"]
@@ -221,3 +242,5 @@ text = "Temperature:"
 [connection signal="mouse_entered" from="Triggers/Handle_Cold" to="." method="_on_Handle_Cold_mouse_entered"]
 [connection signal="mouse_exited" from="Triggers/Handle_Cold" to="." method="_on_Handle_Cold_mouse_exited"]
 [connection signal="mouse_entered" from="Triggers/Door_Handle" to="." method="_on_Door_Handle_mouse_entered"]
+[connection signal="mouse_entered" from="Triggers/Trash" to="." method="_on_Trash_mouse_entered"]
+[connection signal="ready" from="GUI" to="." method="_on_GUI_ready"]

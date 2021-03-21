@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://meshes/Gray.material" type="Material" id=1]
 [ext_resource path="res://meshes/Chrome.material" type="Material" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://meshes/black-plastic.material" type="Material" id=7]
 [ext_resource path="res://meshes/Metal.material" type="Material" id=8]
 [ext_resource path="res://meshes/Floor.material" type="Material" id=9]
+[ext_resource path="res://scenes/GarbageBathroom.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ArrayMesh" id=1]
 resource_name = "video_frame"
@@ -281,11 +282,13 @@ surfaces/0 = {
 
 [node name="video_frame" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.58385, 1.84076, -2.64434 )
+use_in_baked_light = true
 mesh = SubResource( 1 )
 material/0 = null
 
 [node name="videoplayer" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.58385, 1.84076, -2.63859 )
+use_in_baked_light = true
 mesh = SubResource( 2 )
 material/0 = null
 
@@ -296,11 +299,13 @@ material/0 = null
 
 [node name="Faucet_base" type="MeshInstance" parent="."]
 transform = Transform( 5.96046e-07, 0, -1, 0, 1, 0, 1, 0, 5.96046e-07, -1.5926, 1.20973, -2.56208 )
+use_in_baked_light = true
 mesh = SubResource( 4 )
 material/0 = null
 
 [node name="Sink_single" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.09991, 0, -2.10681 )
+use_in_baked_light = true
 mesh = SubResource( 5 )
 material/0 = null
 material/1 = null
@@ -308,6 +313,7 @@ material/2 = null
 
 [node name="Soap" type="MeshInstance" parent="."]
 transform = Transform( 0, 0, -1, 0, 1, 0, 1, 0, 0, -0.867304, 1.56813, -2.65566 )
+use_in_baked_light = true
 mesh = SubResource( 6 )
 material/0 = null
 material/1 = null
@@ -315,28 +321,34 @@ material/2 = null
 
 [node name="PaperTowels" type="MeshInstance" parent="."]
 transform = Transform( 0, 0, -1, 0, 1, 0, 1, 0, 0, -2.55301, 1.99315, -2.64434 )
+use_in_baked_light = true
 mesh = SubResource( 7 )
 material/0 = null
 material/1 = null
 
 [node name="Walls" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 0, -1, 0, 1, 0, -1.07612, 1.56813, -2.71557 )
+use_in_baked_light = true
 mesh = SubResource( 8 )
 material/0 = null
 material/1 = null
 
 [node name="Garbage-can" type="MeshInstance" parent="."]
 transform = Transform( 0.682564, 0, 0.730826, 0, 1, 0, -0.730826, 0, 0.682564, -2.5931, 0.00441301, -2.22166 )
+visible = false
+use_in_baked_light = true
 mesh = SubResource( 9 )
 material/0 = null
 
 [node name="Door_small_frame" type="MeshInstance" parent="."]
 transform = Transform( 0, 0, -1, 0, 1, 0, 1, 0, 0, -3.46281, 0.00256804, -0.326 )
+use_in_baked_light = true
 mesh = SubResource( 10 )
 material/0 = null
 
 [node name="Door_wooden" type="MeshInstance" parent="."]
 transform = Transform( 0, 0, -1, 0, 1, 0, 1, 0, 0, -3.48459, 1.28757, -0.332182 )
+use_in_baked_light = true
 mesh = SubResource( 11 )
 material/0 = null
 
@@ -350,3 +362,5 @@ transform = Transform( 0, 0, -1, 0, 1, 0, 1, 0, 0, -2.59598, 1.60438, -2.51753 )
 visible = false
 mesh = SubResource( 13 )
 material/0 = null
+
+[node name="GarbageBathroom" parent="." instance=ExtResource( 10 )]
