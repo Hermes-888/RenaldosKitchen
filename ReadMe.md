@@ -1,15 +1,37 @@
 # Interactive Handwashing
-Learn the proper way to wash your hands.
+Practice the steps of handwashing. 
 
 ### ToDo:
-Add sounds for paper towel dispenser, door knob, water, points
+Create an introduction and start button?
 
-Theme for UI, choose a font
+Messages pop up if they play with the soap too much?
 
-Draw custom sprites and animated hands scrubbing
+Add sounds for paper towel dispenser, soap dispener, water, door knob, points. (wav or ogg)
 
-Cursor starts as graphic of a hand, 2 hands, png sequence of hands washing, hand w/ towel, 
-Cursor changes to paper towel to open door
+Create a Theme for the UI, choose a bold font. 
+
+Draw custom png sprites and png sequence of hands scrubbing (animated loop). 
+
+The cursor starts as a graphic of a hand to touch the faucet. 
+
+It switches to a pointing finger when it is over the temperature slider. 
+
+It switches to 2 hands facing up while wetting and getting soap. 
+
+Then changes to a png sequence of hands washing. Minimum of 6 frames? that loop. 
+The viewer will need to click for 15 seconds to change the sequence image. maybe? 
+
+Then switchs back to the starting hand to turn off the water. 
+
+It changes to two hands with a paper towel until the dispenser is touched. 
+
+Maybe the viewer has to decide between a cloth towel or the paper towel dispenser? 
+
+Finally it changes to a single hand with a paper towel tilted down to open the door. 
+
+While the camera moves back and rotates to look at the door. 
+
+Demo: [http://dev.krissnik.com/games/handwash/](http://dev.krissnik.com/games/handwash/)
 
 ![](_screenshots/handwashing.png)
 
@@ -25,8 +47,11 @@ Images are mostly 512 and 1024 px compressed jpg.
 The source blend files and images are in the folder kitchenModels/
 
 The Godot project is in the folder kitchen/ 
+
 scenes/ contains the prefabs to use in a project. It has several subfolders. 
 RenaldosKitchen.tscn is the main scene. 
+
+scenes/scripts contains the interative methods.
 
 Demo: [http://dev.krissnik.com/games/kitchen/](http://dev.krissnik.com/games/kitchen/)
 

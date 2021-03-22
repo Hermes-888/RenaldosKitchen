@@ -4,8 +4,8 @@
 [ext_resource path="res://scenes/hand_sink.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/scripts/handwashingManager.gd" type="Script" id=4]
-[ext_resource path="res://scenes/VideoUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Pointsprite.tscn" type="PackedScene" id=6]
+[ext_resource path="res://audio/points.wav" type="AudioStream" id=7]
 
 [sub_resource type="Environment" id=1]
 background_mode = 1
@@ -19,7 +19,7 @@ height = 3.0
 radial_segments = 16
 
 [sub_resource type="BoxShape" id=4]
-extents = Vector3( 0.0466281, 0.126389, 0.0392967 )
+extents = Vector3( 0.0466281, 0.144679, 0.0392967 )
 
 [sub_resource type="Animation" id=5]
 resource_name = "LookDoor"
@@ -65,7 +65,7 @@ tracks/0/keys = {
 "values": [ Transform( 1, 0, 0, 0, 0.998042, 0.0625466, 0, -0.0625466, 0.998042, -1.635, 1.805, 0.839 ), Transform( 1, 0, 0, 0, 0.994117, 0.108312, 0, -0.108312, 0.994117, -1.635, 1.805, -1.129 ) ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=7]
 resource_name = "showPointsprite"
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pointsprite:position")
@@ -92,28 +92,28 @@ tracks/1/keys = {
 "values": [ Vector2( 1, 1 ), Vector2( 2, 2 ), Vector2( 2, 2 ), Vector2( 0.5, 0.5 ) ]
 }
 
-[sub_resource type="BoxShape" id=7]
+[sub_resource type="BoxShape" id=8]
 extents = Vector3( 0.202049, 0.24623, 0.0857883 )
 
-[sub_resource type="BoxShape" id=8]
-extents = Vector3( 0.0883344, 0.151903, 0.059236 )
+[sub_resource type="BoxShape" id=9]
+extents = Vector3( 0.0883344, 0.171228, 0.059236 )
 
-[sub_resource type="PlaneMesh" id=9]
+[sub_resource type="PlaneMesh" id=10]
 material = ExtResource( 1 )
 
-[sub_resource type="BoxShape" id=10]
+[sub_resource type="BoxShape" id=11]
 extents = Vector3( 0.0500326, 0.0433176, 0.0392177 )
 
-[sub_resource type="SpatialMaterial" id=11]
+[sub_resource type="SpatialMaterial" id=12]
 albedo_color = Color( 0.733333, 0.501961, 0.780392, 1 )
 
-[sub_resource type="SphereMesh" id=12]
-material = SubResource( 11 )
-
-[sub_resource type="BoxShape" id=13]
-extents = Vector3( 0.0341196, 0.072016, 0.202603 )
+[sub_resource type="SphereMesh" id=13]
+material = SubResource( 12 )
 
 [sub_resource type="BoxShape" id=14]
+extents = Vector3( 0.0341196, 0.072016, 0.202603 )
+
+[sub_resource type="BoxShape" id=15]
 extents = Vector3( 0.318304, 0.457325, 0.18776 )
 
 [node name="Spatial" type="Spatial"]
@@ -137,6 +137,11 @@ omni_range = 9.0
 
 [node name="Tween" type="Tween" parent="World"]
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="World"]
+stream = ExtResource( 7 )
+volume_db = -6.0
+mix_target = 2
+
 [node name="ClippedCamera" type="ClippedCamera" parent="."]
 transform = Transform( 1, 0, 0, 0, 0.994117, 0.108312, 0, -0.108312, 0.994117, -1.635, 1.805, -1.129 )
 
@@ -158,13 +163,13 @@ scale_amount = 0.02
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0105909, 0 )
 
 [node name="CollisionShape" type="CollisionShape" parent="SpoutBase/SpoutArea"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.12863, 0.275213 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.165208, 0.275213 )
 shape = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/LookDoor = SubResource( 5 )
 anims/MoveCamera = SubResource( 6 )
-anims/showPointsprite = SubResource( 15 )
+anims/showPointsprite = SubResource( 7 )
 
 [node name="Triggers" type="Node" parent="."]
 
@@ -173,21 +178,21 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.56182, 1.76396, -2.53591 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Triggers/Paper_Towels"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0258942, -0.0322933, -0.0840394 )
-shape = SubResource( 7 )
-
-[node name="Soap" type="Area" parent="Triggers"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.874077, 1.6253, -2.64288 )
-
-[node name="CollisionShape" type="CollisionShape" parent="Triggers/Soap"]
 shape = SubResource( 8 )
 
+[node name="Soap" type="Area" parent="Triggers"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.874077, 1.59879, -2.64288 )
+
+[node name="CollisionShape" type="CollisionShape" parent="Triggers/Soap"]
+shape = SubResource( 9 )
+
 [node name="CPUPaperParticles" type="CPUParticles" parent="Triggers"]
-transform = Transform( 1, 0, 0, 0, 0.0244671, -0.999701, 0, 0.999701, 0.0244671, -2.55261, 1.71627, -2.6651 )
+transform = Transform( 1, 0, 0, 0, 0.0244671, -0.999701, 0, 0.999701, 0.0244671, -2.55261, 1.71627, -2.67831 )
 emitting = false
 amount = 2
-lifetime = 3.96
+lifetime = 3.18
 one_shot = true
-mesh = SubResource( 9 )
+mesh = SubResource( 10 )
 direction = Vector3( 0, 0, 0 )
 gravity = Vector3( 0, 0.055, 0.5 )
 linear_accel = -0.31
@@ -197,13 +202,13 @@ scale_amount = 0.16
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.80085, 1.31382, -2.5598 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Triggers/Handle_Hot"]
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 
 [node name="Handle_Cold" type="Area" parent="Triggers"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38442, 1.31305, -2.5598 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Triggers/Handle_Cold"]
-shape = SubResource( 10 )
+shape = SubResource( 11 )
 
 [node name="CPUSoapParticles" type="CPUParticles" parent="Triggers"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.866817, 1.47773, -2.67098 )
@@ -211,7 +216,7 @@ emitting = false
 amount = 3
 lifetime = 0.4
 one_shot = true
-mesh = SubResource( 12 )
+mesh = SubResource( 13 )
 gravity = Vector3( 0, -1.8, 0 )
 scale_amount = 0.03
 
@@ -219,18 +224,15 @@ scale_amount = 0.03
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -3.41805, 1.33129, -1.22575 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Triggers/Door_Handle"]
-shape = SubResource( 13 )
+shape = SubResource( 14 )
 
 [node name="Trash" type="Area" parent="Triggers"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.56253, 0.602103, -2.47571 )
 
 [node name="CollisionShape" type="CollisionShape" parent="Triggers/Trash"]
-shape = SubResource( 14 )
+shape = SubResource( 15 )
 
 [node name="GUI" parent="." instance=ExtResource( 3 )]
-
-[node name="VideoUI" parent="." instance=ExtResource( 5 )]
-visible = false
 
 [node name="Pointsprite" parent="." instance=ExtResource( 6 )]
 position = Vector2( 487, 317 )
@@ -238,9 +240,7 @@ position = Vector2( 487, 317 )
 [connection signal="mouse_entered" from="Triggers/Paper_Towels" to="." method="_on_Paper_Towels_mouse_entered"]
 [connection signal="mouse_entered" from="Triggers/Soap" to="." method="_on_Soap_mouse_entered"]
 [connection signal="mouse_entered" from="Triggers/Handle_Hot" to="." method="_on_Handle_Hot_mouse_entered"]
-[connection signal="mouse_exited" from="Triggers/Handle_Hot" to="." method="_on_Handle_Hot_mouse_exited"]
 [connection signal="mouse_entered" from="Triggers/Handle_Cold" to="." method="_on_Handle_Cold_mouse_entered"]
-[connection signal="mouse_exited" from="Triggers/Handle_Cold" to="." method="_on_Handle_Cold_mouse_exited"]
 [connection signal="mouse_entered" from="Triggers/Door_Handle" to="." method="_on_Door_Handle_mouse_entered"]
 [connection signal="mouse_entered" from="Triggers/Trash" to="." method="_on_Trash_mouse_entered"]
 [connection signal="ready" from="GUI" to="." method="_on_GUI_ready"]
