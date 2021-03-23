@@ -1,0 +1,166 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://textures/thumbHand.png" type="Texture" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 2.0
+content_margin_right = 2.0
+content_margin_top = 2.0
+content_margin_bottom = 0.0
+bg_color = Color( 0.572549, 0.776471, 0.854902, 0.501961 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="GameUI" type="Control"]
+anchor_right = 1.001
+anchor_bottom = 0.253
+margin_right = -0.0240479
+margin_bottom = 0.199982
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+margin_left = 346.0
+margin_top = 50.0
+margin_right = -353.0
+margin_bottom = 283.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+margin_right = 326.0
+margin_bottom = 233.0
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GridRow" type="GridContainer" parent="."]
+anchor_right = 1.0
+margin_left = 359.0
+margin_top = 60.0
+margin_right = -366.0
+margin_bottom = 277.0
+custom_constants/vseparation = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterUI" type="GridContainer" parent="GridRow"]
+margin_right = 300.0
+margin_bottom = 217.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_vertical = 3
+
+[node name="LeftUI" type="GridContainer" parent="GridRow/CenterUI"]
+margin_right = 300.0
+margin_bottom = 40.0
+rect_min_size = Vector2( 300, 40 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="score" type="Label" parent="GridRow/CenterUI/LeftUI"]
+margin_right = 60.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 60, 0 )
+hint_tooltip = "A tooltip for left panel"
+mouse_filter = 0
+size_flags_vertical = 0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.4, 0.4, 0.4, 1 )
+text = "Score: 10"
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="instructions" type="Label" parent="GridRow/CenterUI"]
+margin_top = 44.0
+margin_right = 300.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 300, 40 )
+size_flags_vertical = 1
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.2, 0.2, 0.2, 1 )
+text = "Hold the mouse in the water for 15 seconds."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="againBtn" type="Button" parent="GridRow/CenterUI"]
+margin_top = 88.0
+margin_right = 300.0
+margin_bottom = 128.0
+rect_min_size = Vector2( 90, 40 )
+text = "Play Again"
+
+[node name="RightUI" type="GridContainer" parent="GridRow/CenterUI"]
+margin_top = 132.0
+margin_right = 300.0
+margin_bottom = 198.0
+rect_min_size = Vector2( 300, 0 )
+size_flags_horizontal = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="sliderInstruct" type="Label" parent="GridRow/CenterUI/RightUI"]
+margin_right = 300.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 300, 0 )
+mouse_filter = 0
+size_flags_vertical = 2
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.2, 0.2, 0.2, 1 )
+text = "Drag the slider to adjust water temperature"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="tempSlider" type="HSlider" parent="GridRow/CenterUI/RightUI"]
+margin_top = 18.0
+margin_right = 300.0
+margin_bottom = 48.0
+rect_min_size = Vector2( 0, 30 )
+mouse_default_cursor_shape = 2
+min_value = 80.0
+max_value = 180.0
+step = 10.0
+value = 80.0
+tick_count = 10
+ticks_on_borders = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="temp" type="Label" parent="GridRow/CenterUI/RightUI"]
+margin_top = 52.0
+margin_right = 300.0
+margin_bottom = 66.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0.2, 0.2, 0.2, 1 )
+text = "80 degrees F"
+align = 1
+
+[node name="thumbHand" type="Sprite" parent="."]
+position = Vector2( 510, 80 )
+scale = Vector2( 0.673466, 0.673466 )
+texture = ExtResource( 1 )

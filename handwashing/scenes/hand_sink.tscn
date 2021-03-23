@@ -282,12 +282,14 @@ surfaces/0 = {
 
 [node name="video_frame" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.58385, 1.84076, -2.64434 )
+visible = false
 use_in_baked_light = true
 mesh = SubResource( 1 )
 material/0 = null
 
 [node name="videoplayer" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.58385, 1.84076, -2.63859 )
+visible = false
 use_in_baked_light = true
 mesh = SubResource( 2 )
 material/0 = null

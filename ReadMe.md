@@ -6,7 +6,7 @@ Create an introduction and start button?
 
 Messages pop up if they play with the soap too much?
 
-Add sounds for paper towel dispenser, soap dispener, water, door knob, points. (wav or ogg)
+Add sounds for paper towel dispenser, soap dispenser, water, door knob, points. (wav or ogg)
 
 Create a Theme for the UI, choose a bold font. 
 

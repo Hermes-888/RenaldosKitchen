@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://meshes/paper.material" type="Material" id=1]
 [ext_resource path="res://scenes/hand_sink.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/GUI.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/scripts/handwashingManager.gd" type="Script" id=4]
+[ext_resource path="res://scenes/scripts/handwashingGame.gd" type="Script" id=4]
+[ext_resource path="res://scenes/GameUI.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/Pointsprite.tscn" type="PackedScene" id=6]
 [ext_resource path="res://audio/points.wav" type="AudioStream" id=7]
 
@@ -233,9 +234,12 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -2.56253, 0.602103, -2.47571 )
 shape = SubResource( 15 )
 
 [node name="GUI" parent="." instance=ExtResource( 3 )]
+visible = false
 
 [node name="Pointsprite" parent="." instance=ExtResource( 6 )]
 position = Vector2( 487, 317 )
+
+[node name="GameUI" parent="." instance=ExtResource( 5 )]
 [connection signal="mouse_entered" from="SpoutBase/SpoutArea" to="." method="_on_SpoutArea_mouse_entered"]
 [connection signal="mouse_entered" from="Triggers/Paper_Towels" to="." method="_on_Paper_Towels_mouse_entered"]
 [connection signal="mouse_entered" from="Triggers/Soap" to="." method="_on_Soap_mouse_entered"]
@@ -243,4 +247,4 @@ position = Vector2( 487, 317 )
 [connection signal="mouse_entered" from="Triggers/Handle_Cold" to="." method="_on_Handle_Cold_mouse_entered"]
 [connection signal="mouse_entered" from="Triggers/Door_Handle" to="." method="_on_Door_Handle_mouse_entered"]
 [connection signal="mouse_entered" from="Triggers/Trash" to="." method="_on_Trash_mouse_entered"]
-[connection signal="ready" from="GUI" to="." method="_on_GUI_ready"]
+[connection signal="ready" from="GameUI" to="." method="_on_GameUI_ready"]
